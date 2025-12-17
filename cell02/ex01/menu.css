@@ -1,10 +1,76 @@
 body {
-    background-color: mediumpurple;
+    font-family: Arial, sans-serif;
+    background-color: rgb(196, 167, 255);
     width: 100vw;
     height: 100vh;
 }
 
-.sncf-image {
+.sncf-image img {
     width: 100%;
+    height: auto;
+}
+
+.dropdown {
     text-align: center;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.dropdown-btn {
+    background-color: #71aaff;
+    color: rgb(0, 0, 0);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 200px;
+}
+
+.dropdown-btn:hover {
+    background-color: #5c92d4;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    z-index: 1;
+    text-align: left;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.dropdown-content a:hover {
+    background-color: #f5f5f5;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+footer {
+    text-align: right;
+    font-style: italic;
+    color: black;
+}
+
+hr {
+    color: black;
+    background-color: black;
+    height: 1px;
+    border: none;
 }

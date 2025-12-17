@@ -1,0 +1,95 @@
+body {
+    font: 1.2em sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aquamarine;
+}
+
+img {
+    max-width: 100%;
+}
+
+.card {
+    border: 1px solid #999999;
+    display: grid;
+    grid-template-rows: max-content 200px 1fr;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    width: 300px;
+}
+
+.card img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.card h2 {
+    margin: 0;
+    padding: 0.5rem;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+.card .content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user p {
+    font-weight: bold;
+    font-size: 1.3em;
+    margin: 0 0 0.5rem 0;
+    text-align: center;
+}
+
+.description p {
+    margin: 0.3rem 0;
+    color: #666;
+    text-align: center;
+}
+
+.social-networks {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.linkedin:hover {
+            color: #0077b5;
+}
+
+.github:hover {
+            color: #333;
+}
+
+.instagram:hover {
+            color: #e4405f;
+}
+
+.contact-button {
+    margin-top: 1rem;
+    text-align: center;
+    justify-content: center;
+}
+
+.contact-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #00ffbf;
+    color: #000000;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+}
