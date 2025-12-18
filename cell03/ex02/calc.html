@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calculator</title>
+        <style>
+            body {
+                margin: 0;
+                display:flex;
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+                min-height: 100vh;
+                justify-content: center;
+                font-family: Arial, sans-serif;
+                background-color: aquamarine;
+            }
+            
+            .calculator-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            h2 {
+                margin: 0;
+            }
+
+            section {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+
+            div {
+                display: inline-block;
+                margin: 5px;
+                padding: 10px;
+            }
+
+            .operator-dropdown {
+                width: 80px;
+            }
+
+            #operator-dropdown {
+                box-sizing: border-box;
+                text-align: center;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="calculator-container">
+            <h2>Calculator</h2>
+            <section>
+                <div class="left-member" id="left-member">
+                    <label for="left-input">
+                        <input type="text" id="left-input" name="left-input">
+                    </label>
+                </div>
+                <div class="operator-dropdown" id="operator-dropdown">
+                    <label for="operator-select">
+                        <select name="operators" id="operator-select">
+                            <option value=""></option>
+                            <option value="+">+</option>
+                            <option value="-">-</option>
+                            <option value="*">*</option>
+                            <option value="/">/</option>
+                            <option value="%">%</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="right-member" id="right-member">
+                    <label for="right-input">
+                        <input type="text" id="right-input" name="right-input">
+                    </label>
+                </div>
+                <div class="submit-button" id="submit-button">
+                    <label for="submit-input">
+                        <input type="submit" id="submit-input" name="submit-input">
+                    </label>
+                </div>
+            </section>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const leftInput = document.getElementById('left-input');
+                const rightInput = document.getElementById('right-input');
+                const operatorSelect = document.getElementById('operator-select');
+                const submitInput = document.getElementById('submit-input');
+
+                let reminderInterval;
+
+                function startReminder() {
+                    if (reminderInterval) {
+                        clearInterval(reminderInterval);
+                    }
+                    reminderInterval = setInterval(function() {
+                        alert('Please, use me...');
+                    }, 30000);
+                }
+
+                startReminder();
+
+                function resetReminder() {
+                    startReminder();
+                }
+
+                submitInput.addEventListener('click', function(event) {
+                    event.preventDefault();
+
+                    const leftValue = parseFloat(leftInput.value);
+                    const rightValue = parseFloat(rightInput.value);
+                    const operator = operatorSelect.value;
+                    let result;
+
+                    if ((isNaN(leftValue) || isNaN(rightValue)) || (leftValue < 0 || rightValue < 0)) {
+                        alert('Error :(');
+                        return;
+                    }
+
+                    switch (operator) {
+                        case '+':
+                            result = leftValue + rightValue;
+                            break;
+                        case '-':
+                            result = leftValue - rightValue;
+                            break;
+                        case '*':
+                            result = leftValue * rightValue;
+                            break;
+                        case '/':
+                            if (rightValue === 0) {
+                                alert('It\'s over 9000!');
+                                return;
+                            }
+                            result = leftValue / rightValue;
+                            break;
+                        case '%':
+                            if (rightValue === 0) {
+                                alert('It\'s over 9000!');
+                                return;
+                            }
+                            result = leftValue % rightValue;
+                            break;
+                        default:
+                            alert('Please select a valid operator.');
+                            return;
+                    }
+
+                    alert(`Result: ${result}`);
+                    console.log(`Calculated: ${leftValue} ${operator} ${rightValue} = ${result}`);
+
+                    resetReminder();
+                });
+
+                leftInput.addEventListener('input', resetReminder);
+                rightInput.addEventListener('input', resetReminder);
+                operatorSelect.addEventListener('change', resetReminder);
+            });
+        </script>
+    </body>
+</html>
