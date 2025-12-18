@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Balloon</title>
+        <style>
+            body {
+                margin: 0;
+                height: 100vh;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                background-color: white;
+            }
+            
+            .balloon {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                background-color: red;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            @keyframes explode {
+                0% { transform: scale(1); opacity: 1; }
+                50% { transform: scale(1.2); opacity: 0.7; }
+                100% { transform: scale(0); opacity: 0; }
+            }
+
+            .exploding {
+                animation: explode 0.5s forwards;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="balloon" id="balloon"></div>
+        <script>
+            const balloon = document.getElementById('balloon');
+            let size = 200;
+            let colorIndex = 0;
+            let isShrinking = false;
+
+            const colorsArray = [
+                "red",
+                "green",
+                "blue"
+            ];
+
+            balloon.addEventListener('click', function() {
+                size += 10;
+                colorIndex = (colorIndex + 1) % colorsArray.length;
+                balloon.style.width = `${size}px`
+                balloon.style.height = `${size}px`
+                balloon.style.backgroundColor = colorsArray[colorIndex];
+
+                if (size > 420) {
+                    balloon.classList.add('exploding');
+
+                    setTimeout(() => {
+                        size = 200;
+                        colorIndex = 0;
+                        balloon.style.width = `${size}px`
+                        balloon.style.height = `${size}px`
+                        balloon.style.backgroundColor = colorsArray[colorIndex];
+                        balloon.classList.remove('exploding');
+                    }, 500);
+                }
+            });
+
+            balloon.addEventListener('mouseleave', function() {
+                if (size > 200 && !isShrinking) {
+                    startShrinking();
+                }
+            });
+
+            function startShrinking() {
+                isShrinking = true;
+                const shrinkInterval = setInterval(() => {
+                    if (size > 200) {
+                        size -= 5;
+                        colorIndex = (colorIndex -1 + colorsArray.length) % colorsArray.length;
+                        balloon.style.width = `${size}px`
+                        balloon.style.height = `${size}px`
+                        balloon.style.backgroundColor = colorsArray[colorIndex];
+                    }
+                    else {
+                        colorIndex = 0;
+                        balloon.style.backgroundColor = colorsArray[colorIndex];
+                        clearInterval(shrinkInterval);
+                        isShrinking = false;
+                    }
+                }, 300);
+            }
+        </script>
+    </body>
+</html>
